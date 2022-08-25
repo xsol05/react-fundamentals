@@ -1,24 +1,171 @@
 <!-- Creating custom components -->
 <!-- http://localhost:3000/isolated/exercise/04.html -->
 
-<body>
+<!-- Exercise -->
+<!-- <body>
   <div id="root"></div>
   <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
   <script type="text/babel">
     // 🐨 Make a function called `message` which returns the JSX we want to share
+    // const message = props => <div className="message">{props.children}</div> // Undestructured
+    const message = ({children}) => <div className="message">{children}</div> // Destructured
 
     // 🐨 use that function in place of the divs below with:
     // 💰 {message({children: 'Hello World'})} {message({children: 'Goodbye World'})}
     const element = (
       <div className="container">
-        <div className="message">Hello World</div>
-        <div className="message">Goodbye World</div>
+        {message({children: 'Hello World'})}{' '}
+        {message({children: 'Goodbye World'})}
       </div>
     )
 
     // 💯 This is only the first step to making actual React components. The rest is in the extra credit!
+    ReactDOM.createRoot(document.getElementById('root')).render(element)
+  </script>
+</body> -->
+
+<!-- Extra Credit 1 -->
+<!-- <body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+  <script type="text/babel">
+    const message = ({children}) => <div className="message">{children}</div> // Destructured
+
+    const element1 = React.createElement(message, {
+      children: 'Hello World EC1',
+    })
+    const element2 = React.createElement(message, {
+      children: 'Goodbye World EC2',
+    })
+
+    const element = (
+      <div className="container">
+        {element1}
+        {element2}
+      </div>
+    )
+
+    ReactDOM.createRoot(document.getElementById('root')).render(element)
+  </script>
+</body> -->
+
+<!-- Extra Credit 2 -->
+<!-- <body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+  <script type="text/babel">
+    const Message = ({children}) => <div className="message">{children}</div> // Destructured
+
+    const element = (
+      <div className="container">
+        <Message children="Hello World EC2" />
+        <Message children="Goodbye World EC2" />
+      </div>
+    )
+
+    ReactDOM.createRoot(document.getElementById('root')).render(element)
+  </script>
+</body> -->
+
+<!-- Extra Credit 3 -->
+<!-- <body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+  <script type="text/babel">
+    const PropTypes = {
+      string(props, propName, componentName) {
+        if (typeof props[propName] !== 'string') {
+          return new Error(`Hey, ${propName} should be of type "string"!`)
+        }
+      },
+    }
+
+    const Message = ({subject, greeting}) => (
+      <div className="message">
+        {greeting}, {subject}
+      </div>
+    )
+
+    Message.propTypes = {
+      subject: PropTypes.string,
+      greeting: PropTypes.string,
+    }
+
+    const element = (
+      <div className="container">
+        <Message greeting={787878} subject="World EC3" />
+        <Message greeting="Goodbye" subject={787878} />
+      </div>
+    )
+
+    ReactDOM.createRoot(document.getElementById('root')).render(element)
+  </script>
+</body> -->
+
+<!-- Extra Credit 4 -->
+<!-- <body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script type="text/babel">
+    const Message = ({subject, greeting}) => (
+      <div className="message">
+        {greeting}, {subject}
+      </div>
+    )
+
+    Message.propTypes = {
+      subject: PropTypes.string.isRequired,
+      greeting: PropTypes.string.isRequired,
+    }
+
+    const element = (
+      <div className="container">
+        <Message greeting={787878} />
+        <Message greeting="Goodbye" subject={787878} />
+      </div>
+    )
+
+    ReactDOM.createRoot(document.getElementById('root')).render(element)
+  </script>
+</body> -->
+
+<!-- Extra Credit 5 -->
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script type="text/babel">
+    const Message = ({subject, greeting}) => (
+      <div className="message">
+        {greeting}, {subject}
+      </div>
+    )
+
+    Message.propTypes = {
+      subject: PropTypes.string.isRequired,
+      greeting: PropTypes.string.isRequired,
+    }
+
+    const element = (
+      <>
+        <Message greeting="Hello" subject="World EC5" />
+        <Message greeting="Goodbye" subject="World EC5" />
+      </>
+    )
+
     ReactDOM.createRoot(document.getElementById('root')).render(element)
   </script>
 </body>
